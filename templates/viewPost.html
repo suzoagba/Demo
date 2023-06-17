@@ -1,0 +1,78 @@
+{{ define "content" }}
+<div class="container">
+  <p><a href="/" class="backButton"><< Back to main page</a></p>
+  <h2>{{ .Post.Title }}</h2>
+  <div class="post">
+    <div class="commentInfo">
+      <p class="postInfo">
+        <span class="author">{{ .Post.Username }}</span>
+        <br>
+        <span class="creationDate">{{ .Post.CreationDate }}</span>
+      </p>
+      {{ if .Post.ImageFileName }}
+      <img class="postImage" src="../assets/uploads/{{ .Post.ImageFileName }}" alt="Post image">
+      {{ end }}
+      <p class="description">
+        {{ .Post.Description }}
+      </p>
+      <div class="liking">
+        <span class="likes">
+          {{ .Post.Likes }}
+          {{ if $.User.LoggedIn }}
+          <a title="Like" href="/viewPost?id={{ $.Post.ID }}&react=0&like=true">&#x1F44D;</a>
+          {{ else }}
+          &#x1F44D;
+          {{ end }}
+        </span>
+        <span class="dislikes">{{ .Post.Dislikes }}</span>
+        {{ if $.User.LoggedIn }}
+        <a title="Dislike" href="/viewPost?id={{ $.Post.ID }}&react=0&like=false">&#x1F44E;</a>
+        {{ else }}
+        &#x1F44E;
+        {{ end }}
+      </div>
+    </div>
+  </div>
+  {{ range .Comments }}
+  <div class="commentInfo" id="comment{{ .ID }}">
+    <p class="postInfo">
+      <span class="author">{{ .Username }}</span>
+      <br>
+      <span class="creationDate">{{ .CreationDate }}</span>
+    </p>
+    <p class="commentText">
+      {{ .Content }}
+    </p>
+    <div class="liking">
+        <span class="likes">
+          {{ .Likes }}
+          {{ if $.User.LoggedIn }}
+          <a href="/viewPost?id={{ $.Post.ID }}&react={{ .ID }}&like=true#comment{{ .ID }}">&#x1F44D;</a>
+          {{ else }}
+          &#x1F44D;
+          {{ end }}
+        </span>
+      <span class="dislikes">{{ .Dislikes }}</span>
+      {{ if $.User.LoggedIn }}
+      <a href="/viewPost?id={{ $.Post.ID }}&react={{ .ID }}&like=false#comment{{ .ID }}">&#x1F44E;</a>
+      {{ else }}
+      &#x1F44E;
+      {{ end }}
+    </div>
+  </div>
+  {{ end }}
+  {{ if .User.LoggedIn }}
+  <div class="reply">
+    <h3>Reply:</h3>
+    <form action="/reply" method="POST">
+      <input type="hidden" name="postID" value="{{ .Post.ID }}">
+      <textarea name="content" placeholder="Enter your reply" required></textarea>
+      <br>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  {{ else }}
+  <p>Please log in to reply or react to this post or comments.</p>
+  {{ end }}
+</div>
+{{ end }}

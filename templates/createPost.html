@@ -1,0 +1,36 @@
+{{ define "content" }}
+<div class="container">
+    <p><a href="/" class="backButton"><< Back to main page</a></p>
+    <h2>Create a New Post</h2>
+    {{ if .User.LoggedIn }}
+    <div class="createPost">
+        <form id="createPost" method="POST" action="/createPost" enctype="multipart/form-data" onsubmit="return validateForm()">
+            <label for="title">Title:</label>
+            <br>
+            <input type="text" id="title" name="title" required>
+            <br>
+            <label for="description">Description:</label>
+            <br>
+            <textarea id="description" name="description" required></textarea>
+            <br>
+            <label for="image">Image:</label>
+            <br>
+            <input type="file" id="image" name="image" accept="image/*">
+            <br>
+            <label>Tags:</label>
+            <br>
+            {{ range .Tags }}
+            <input type="checkbox" name="tags" value="{{ .ID }}"> {{ .Name }}<br>
+            {{ end }}
+
+            <button type="submit">Create Post</button>
+        </form>
+    </div>
+    <script>
+
+    </script>
+    {{ else }}
+    <p>You need to be logged in to create a new post.</p>
+    {{ end }}
+</div>
+{{ end }}

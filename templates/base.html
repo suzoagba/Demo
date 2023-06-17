@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>forum</title>
+    <link rel="stylesheet" href="/assets/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap" rel="stylesheet">
+    <script src="/assets/main.js"></script>
+</head>
+<body>
+    <div class="navBar">
+        <a href="/"><h1 id="logo">forum</h1></a>
+        <div class="user">
+            {{ if .User.LoggedIn }}
+            Logged in as <strong>{{ .User.Username }}</strong>
+            {{ end }}
+            <ul>
+                {{ if .User.LoggedIn }}
+                <li><a href="/logout">Log out</a></li>
+                {{ else }}
+                <li><a href="/register">Register</a></li>
+                <li><a href="/login">Log in</a></li>
+                {{ end }}
+            </ul>
+        </div>
+    </div>
+
+    {{ template "content" . }}
+
+</body>
+</html>

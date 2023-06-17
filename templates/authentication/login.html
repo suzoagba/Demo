@@ -1,0 +1,20 @@
+{{ define "content" }}
+<div class="container">
+  <div class="login">
+    <h2>Login</h2>
+    {{ if .Error.Error }}
+    <p class="errorMessage">{{ .Error.Message }}</p>
+    {{ end }}
+    <form action="/login" method="POST">
+      <label for="username">Username:</label>
+      <br>
+      <input type="text" id="username" name="username" placeholder="Username" autocomplete="username"{{ if .Error.Error }} value="{{ .Error.Field1 }}"{{ end }} required>
+      <br>
+      <label for="password">Password:</label>
+      <br>
+      <input type="password" id="password" name="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+</div>
+{{ end }}
