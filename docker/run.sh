@@ -1,3 +1,3 @@
-docker container run -p 8080:8080 --detach --name forum forum
-echo "Docker started"
+docker container run -p 8080:8080 --name forum forum
+echo "Docker started, go to:"
 echo "http://localhost:8080"

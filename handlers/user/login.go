@@ -63,7 +63,7 @@ func login(w http.ResponseWriter, r *http.Request, db *sql.DB, forPage structs.F
 		return
 	} else {
 		forPage.Error.Error = true
-		forPage.Error.Message = "Check your password"
+		forPage.Error.Message = "Check your username/password"
 		handlers.RenderTemplates("login", forPage, w, r)
 		return
 	}

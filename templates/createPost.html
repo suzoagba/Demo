@@ -3,15 +3,18 @@
     <p><a href="/" class="backButton"><< Back to main page</a></p>
     <h2>Create a New Post</h2>
     {{ if .User.LoggedIn }}
+    {{ if .Error.Error }}
+    <p class="errorMessage">{{ .Error.Message }}</p>
+    {{ end }}
     <div class="createPost">
         <form id="createPost" method="POST" action="/createPost" enctype="multipart/form-data" onsubmit="return validateForm()">
             <label for="title">Title:</label>
             <br>
-            <input type="text" id="title" name="title" required>
+            <input type="text" id="title" name="title"{{ if .Error.Error }} value="{{ .Error.Field1 }}"{{ end }} maxlength="130" required>
             <br>
             <label for="description">Description:</label>
             <br>
-            <textarea id="description" name="description" required></textarea>
+            <textarea id="description" name="description" maxlength="1000" required>{{ if .Error.Error }}{{ .Error.Field2 }}{{ end }}</textarea>
             <br>
             <label for="image">Image:</label>
             <br>
@@ -20,7 +23,14 @@
             <label>Tags:</label>
             <br>
             {{ range .Tags }}
-            <input type="checkbox" name="tags" value="{{ .ID }}"> {{ .Name }}<br>
+                {{ $checked := false }}
+                {{ $currentID := .ID | printf "%d" }}
+                {{ range $item := $.Error.Field3 }}
+                    {{ if eq $item $currentID }}
+                        {{ $checked = true }}
+                    {{ end }}
+                {{ end }}
+            <input type="checkbox" name="tags" value="{{ .ID }}"{{ if $checked }} checked{{ end }}> {{ .Name }}<br>
             {{ end }}
 
             <button type="submit">Create Post</button>

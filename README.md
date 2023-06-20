@@ -1,4 +1,4 @@
-# forum
+# forum-image-upload
 
 This project consists in creating a web forum that allows :
 
@@ -55,6 +55,16 @@ A filter mechanism has been implemented, that will allow users to filter the dis
 - liked posts.
 
 The last two are only available for registered users and must refer to the logged-in user.
+
+### Image Upload
+
+In forum image upload, registered users have the possibility to create a post containing an image as well as text.
+
+- When viewing the post, users and guests can see the image associated to it.
+In this project JPG, JPEG, PNG and GIF types are handled.
+
+The max size of the images to load is 20 mb. If there is an attempt to load an image greater than 20 mb, 
+an error message will the user that the image is too big.
 
 ### Docker
 
