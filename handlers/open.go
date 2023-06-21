@@ -20,5 +20,6 @@ func Open(path string) { // https://github.com/0x434D53/openinbrowser
 	err := cmd.Run()
 	if err != nil {
 		log.Printf("openinbrowser: %v\n", err)
+		log.Printf("openinbrowser: %v\n", err.Error())
 	}
 }
