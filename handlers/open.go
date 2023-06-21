@@ -19,7 +19,6 @@ func Open(path string) { // https://github.com/0x434D53/openinbrowser
 	cmd := exec.Command(args[0], args[1:]...)
 	err := cmd.Run()
 	if err != nil {
-		log.Printf("openinbrowser: %v\n", err)
-		log.Printf("openinbrowser: %v\n", err.Error())
+		log.Printf("openinbrowser: %v, this function is not working in Docker. Open link manually.", err)
 	}
 }
