@@ -4,7 +4,7 @@
 ##
 FROM golang:1.18 AS build
 LABEL project = "forum"
-LABEL authors = "Willem Kuningas"
+LABEL authors = "Willem Kuningas & Samuel Uzoagba"
 LABEL version = "1.0"
 # Dependancies
 WORKDIR /go/src/forum
